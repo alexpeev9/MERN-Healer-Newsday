@@ -1,7 +1,7 @@
 const baseUrl = () => {
     if(process.env.NODE_ENV === "production")
     {
-        return process.env.BASEURL+"/api";
+        return process.env.REACT_APP_BASE_URL+"/api";
     }
     else{
         return `http://localhost:${process.env.REACT_APP_SERVER_PORT}/api`
