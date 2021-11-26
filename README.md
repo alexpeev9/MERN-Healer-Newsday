@@ -1,2 +1,4 @@
-# mern-healer-newsday
- 
+![Logo]
+
+<!-- MARKDOWN LINKS & IMAGES -->
+[logo]: client/public/images/HealerFull.png
