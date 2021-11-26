@@ -7,7 +7,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "SET NODE_ENV=production&& cd server && npm install && node ./src/index.js",
+    "start": "cd server && npm install && node ./src/index.js",
     "heroku-postbuild": "cd client && npm install && npm run build",
     "client": "SET NODE_ENV=development&& cd client && npm start",
     "server": "SET NODE_ENV=development&& cd server && npm start",
