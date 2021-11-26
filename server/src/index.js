@@ -3,7 +3,7 @@ const dotenv = require('dotenv');
 
 dotenv.config({ path: './.env' });
 
-const port = process.env.SERVER_PORT;
+const port = process.env.PORT;
 
 const getConnectionString = () => {
     if(process.env.NODE_ENV == "production")
