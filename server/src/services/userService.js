@@ -20,8 +20,8 @@ exports.login = async ({ username, password }) => {
     };
 
     let token = await jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '7D' });
-
-    return { payload, token };
+    
+    return token;
 }
 
 exports.register = (userData) => User.create(userData);

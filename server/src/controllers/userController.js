@@ -6,10 +6,9 @@ const register = async (req, res) => {
 
     try {
         await userService.register({ username, firstName, lastName, password });
-        let {payload, token} = await userService.login({ username, password });
-
+        let token = await userService.login({ username, password });
+        
         res.json({
-            payload,
             token
         });
     } catch (err) {
@@ -20,10 +19,9 @@ const register = async (req, res) => {
 const login = async (req, res) => {
     let { username, password } = req.body;
     try{
-        let {payload, token} = await userService.login({ username, password });
-    
+        let token = await userService.login({ username, password });
+
         res.json({
-            payload,
             token
         });
     }catch(err){
