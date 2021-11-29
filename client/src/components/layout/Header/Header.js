@@ -1,4 +1,6 @@
-const Header = () => {
+import './Header.css';
+
+const Header = ({ user }) => {
     return (
         <div className="m-4">
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -14,8 +16,15 @@ const Header = () => {
                             <a href="/" className="nav-item nav-link active">Home</a>
                         </div>
                         <div className="navbar-nav ms-auto">
+                            {user ? (
+                                <>
+                                    <p className="nav-item nav-link user-message">Hello {user}</p>
+                                    <a href="/logout" className="nav-item nav-link">Logout</a>
+                                </>) : (
+                                <>
                                     <a href="/login" className="nav-item nav-link">Login</a>
                                     <a href="/register" className="nav-item nav-link">Register</a>
+                                </>)}
                         </div>
                     </div>
                 </div>
