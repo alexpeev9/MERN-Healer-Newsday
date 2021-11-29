@@ -26,5 +26,6 @@
   "bugs": {
     "url": "https://github.com/alexpeev9/MERN-Healer-Newsday/issues"
   },
-  "homepage": "https://github.com/alexpeev9/MERN-Healer-Newsday#readme"
+  "homepage": "https://github.com/alexpeev9/MERN-Healer-Newsday#readme",
+  "dependencies": {}
 }
