@@ -1,10 +1,15 @@
+import { useContext } from "react"
 import { useNavigate } from 'react-router-dom';
 
 import './Register.css';
-import { register } from '../../services/authService.js';
+import { register } from '../../services/userService.js';
+import { setCookie } from '../../utils/cookieUtils.js';
+import { UserContext } from '../../utils/Context.js';
 
 const Register = () => {
     const navigate = useNavigate();
+    const setUsername = useContext(UserContext)[1]
+
     const onRegister = (e) => {
         e.preventDefault();
         let formData = new FormData(e.currentTarget);
@@ -12,7 +17,7 @@ const Register = () => {
         let username = formData.get('username');
         let password = formData.get('password');
         let firstName = formData.get('firstName');
-        let lastName = formData.get('firstName');
+        let lastName = formData.get('lastName');
 
         register({
             username,
@@ -21,7 +26,8 @@ const Register = () => {
             password,
         })
             .then(result => {
-                console.log(result);
+                setCookie(result);
+                setUsername(username);
                 navigate('/');
             })
     }
