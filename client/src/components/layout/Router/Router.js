@@ -6,6 +6,8 @@ import Register from '../../../pages/Register';
 import Login from '../../../pages/Login';
 import Home from '../../../pages/Home';
 
+import Logout from '../../auth/Logout';
+
 const Router = () => {
     return (
         <BrowserRouter>
@@ -14,6 +16,7 @@ const Router = () => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="*" element={<Error />} />
+                <Route path="/logout" element={<Logout />} />
             </Routes>
         </BrowserRouter>
     );
