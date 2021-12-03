@@ -6,12 +6,12 @@ exports.login = async ({ username, password }) => {
     let user = await User.findByUsername(username);
 
     if (!user) {
-        throw new Error('Invalid Username or Password!')
+        throw new Error('Invalid Username!')
     }
     let isValid = await user.validatePassword(password);
 
     if (!isValid) {
-        throw new Error('Invalid Username or password');
+        throw new Error('Invalid Password!');
     }
 
     let payload = {
@@ -24,7 +24,14 @@ exports.login = async ({ username, password }) => {
     return token;
 }
 
-exports.register = (userData) => User.create(userData);
+exports.register = async (userData) => {
+    let isExisting = await User.findByUsername(userData.username)
+    if(isExisting)
+    {
+        throw new Error('This username is already been used!')
+    }
+    return User.create(userData);
+}    
 
 exports.getAll = () => User.find().lean();
 exports.getOne = (id) => User.findById(id).lean();
