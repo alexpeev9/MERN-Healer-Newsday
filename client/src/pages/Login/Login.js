@@ -4,28 +4,28 @@ import { useNavigate } from 'react-router-dom';
 import './Login.css';
 import { login } from '../../services/userService.js';
 import { setCookie } from '../../utils/cookieUtils.js';
-import { UserContext } from '../../utils/Context.js';
+import { UserContext, ErrorContext } from '../../utils/Context.js';
 
 const Login = () => {
     const navigate = useNavigate();
     const setUsername = useContext(UserContext)[1]
+    const setError = useContext(ErrorContext)[1]
 
-    const onLogin = (e) => {
+    const onLogin = async (e) => {
         e.preventDefault();
         let formData = new FormData(e.currentTarget);
 
         let username = formData.get('username');
         let password = formData.get('password');
 
-        login({
-            username,
-            password,
-        })
-            .then(result => {
-                setCookie(result);
-                setUsername(username);
-                navigate('/');
-            })
+        let response = await login({ username, password });
+        if (response.ok) {
+            setCookie(response.token);
+            setUsername(username);
+            navigate('/');
+        } else {
+            setError(`Error: ${response.message}`)
+        }
     }
     return (
         <div className="login-form">

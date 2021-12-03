@@ -4,13 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import './Register.css';
 import { register } from '../../services/userService.js';
 import { setCookie } from '../../utils/cookieUtils.js';
-import { UserContext } from '../../utils/Context.js';
+import { UserContext, ErrorContext } from '../../utils/Context.js';
 
 const Register = () => {
     const navigate = useNavigate();
-    const setUsername = useContext(UserContext)[1]
+    const setUsername = useContext(UserContext)[1];
+    const setError = useContext(ErrorContext)[1];
 
-    const onRegister = (e) => {
+    const onRegister = async (e) => {
         e.preventDefault();
         let formData = new FormData(e.currentTarget);
 
@@ -19,17 +20,14 @@ const Register = () => {
         let firstName = formData.get('firstName');
         let lastName = formData.get('lastName');
 
-        register({
-            username,
-            firstName,
-            lastName,
-            password,
-        })
-            .then(result => {
-                setCookie(result);
-                setUsername(username);
-                navigate('/');
-            })
+        let response = await register({ username, firstName, lastName, password });
+        if (response.ok) {
+            setCookie(response.token);
+            setUsername(username);
+            navigate('/');
+        } else {
+            setError(`Error: ${response.message}`)
+        }
     }
     return (
         <div className="register-form">
@@ -54,7 +52,7 @@ const Register = () => {
                     <button type="submit" className="btn btn-success btn-block">Register</button>
                 </div>
                 <div className="clearfix">
-                    <label className="float-left form-check-label"><input type="checkbox"/> Remember me</label>
+                    <label className="float-left form-check-label"><input type="checkbox" /> Remember me</label>
                 </div>
             </form>
         </div>
