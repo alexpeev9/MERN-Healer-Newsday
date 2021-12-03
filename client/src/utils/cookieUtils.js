@@ -5,8 +5,7 @@ const jwtDecodeUtil = (token) => {
     return jwtDecode(token)
 }
 
-export const setCookie = (JWTtoken) => {
-    let token = JWTtoken.token;
+export const setCookie = (token) => {
     let payload = jwtDecodeUtil(token);
     const username = payload.username;
     const userId = payload._id;
