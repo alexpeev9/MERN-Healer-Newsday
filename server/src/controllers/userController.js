@@ -9,10 +9,18 @@ const register = async (req, res) => {
         let token = await userService.login({ username, password });
         
         res.json({
+            ok: true, 
+            status: 200, 
+            statusCode: "OK",
             token
         });
     } catch (err) {
-        res.status(401).send(err.message);
+        res.status(401).json({
+            ok: false,
+            status: "Unauthorized",
+            statusCode: 401,
+            message: err.message
+        });
     }
 };
 
@@ -22,10 +30,18 @@ const login = async (req, res) => {
         let token = await userService.login({ username, password });
 
         res.json({
+            ok: true, 
+            status: 200, 
+            statusCode: "OK",
             token
         });
     }catch(err){
-        res.status(401).send(err.message);
+        res.status(401).json({
+            ok: false,
+            status: "Unauthorized",
+            statusCode: 401,
+            message: err.message
+        });
     }
 };
 
