@@ -1,11 +1,11 @@
 import { serviceFetch } from "./service.js"
 
-export const login = async (userData) => {
+export const loginService = async (userData) => {
     let response = await serviceFetch('/user/login', 'POST', userData);
     return response;
 };
 
-export const register = async (userData) => {
+export const registerService = async (userData) => {
     let response = await serviceFetch('/user/register', 'POST', userData);
     return response;
 };
