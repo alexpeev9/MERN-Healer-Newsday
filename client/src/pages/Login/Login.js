@@ -35,9 +35,6 @@ const Login = () => {
                     <Button type="submit" className="btn btn-primary btn-block">
                         Login
                     </Button>
-                    <div className="clearfix">
-                        <label className="float-left form-check-label"><input type="checkbox" /> Remember me</label>
-                    </div>
                 </Form>
             </FormProvider>
             <p className="text-center"><a href="/register">Create an Account</a></p>
