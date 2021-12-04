@@ -1,24 +1,23 @@
 import { useContext } from "react"
 import { useNavigate } from 'react-router-dom';
+import { useForm, FormProvider } from "react-hook-form";
+import { Form, Button } from 'semantic-ui-react';
 
 import './Login.css';
-import { login } from '../../services/userService.js';
+import Username from "../../components/inputs/Username/Username";
+import Password from "../../components/inputs/Password";
+import { loginService } from '../../services/userService.js';
 import { setCookie } from '../../utils/cookieUtils.js';
 import { UserContext, ErrorContext } from '../../utils/Context.js';
 
 const Login = () => {
+    const methods = useForm();
     const navigate = useNavigate();
     const setUsername = useContext(UserContext)[1]
     const setError = useContext(ErrorContext)[1]
 
-    const onLogin = async (e) => {
-        e.preventDefault();
-        let formData = new FormData(e.currentTarget);
-
-        let username = formData.get('username');
-        let password = formData.get('password');
-
-        let response = await login({ username, password });
+    const onLogin = async ({ username, password }) => {
+        let response = await loginService({ username, password });
         if (response.ok) {
             setCookie(response.token);
             setUsername(username);
@@ -29,21 +28,18 @@ const Login = () => {
     }
     return (
         <div className="login-form">
-            <form onSubmit={onLogin} method="POST">
-                <h2 className="text-center">Log in</h2>
-                <div className="form-group">
-                    <input type="text" name="username" className="form-control" placeholder="Username" required="required" />
-                </div>
-                <div className="form-group">
-                    <input type="password" name="password" className="form-control" placeholder="Password" required="required" />
-                </div>
-                <div className="form-group">
-                    <button type="submit" className="btn btn-primary btn-block">Log in</button>
-                </div>
+             <FormProvider {...methods} >
+            <Form onSubmit={methods.handleSubmit(onLogin)} method="POST">
+                <Username />
+                <Password />
+                <Button type="submit" className="btn btn-primary btn-block">
+                    Login
+                </Button>
                 <div className="clearfix">
                     <label className="float-left form-check-label"><input type="checkbox" /> Remember me</label>
                 </div>
-            </form>
+            </Form>
+            </FormProvider>
             <p className="text-center"><a href="/register">Create an Account</a></p>
         </div>
     );
