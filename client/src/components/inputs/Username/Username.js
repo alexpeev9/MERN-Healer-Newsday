@@ -1,26 +1,12 @@
 import { Form } from 'semantic-ui-react';
 import { useFormContext } from "react-hook-form";
+import ErrorInput from '../../error/ErrorInput/ErrorInput';
 
 const Username = () => {
-    const { register, formState: { errors } } = useFormContext();
+    const { register } = useFormContext();
     return (
         <Form.Field>
-            {errors.username ? (
-                <>
-                    {errors.username.type === "required" && (
-                        <p>{errors.username.message}</p>
-                    )}
-                    {errors.username.type === "minLength" && (
-                        <p>{errors.username.message}</p>
-                    )}
-                    {errors.username.type === "maxLength" && (
-                        <p>{errors.username.message}</p>
-                    )}
-                    {errors.username.type === "pattern" && (
-                        <p>{errors.username.message}</p>
-                    )}
-                </>
-            ) : null}
+            <ErrorInput value="username" />
             <label>Username</label>
             <input
                 placeholder='Username'
