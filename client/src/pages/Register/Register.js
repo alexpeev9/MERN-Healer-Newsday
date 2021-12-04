@@ -2,7 +2,7 @@ import { useContext } from "react"
 import { useNavigate } from 'react-router-dom';
 
 import './Register.css';
-import { register } from '../../services/userService.js';
+import { registerService } from '../../services/userService.js';
 import { setCookie } from '../../utils/cookieUtils.js';
 import { UserContext, ErrorContext } from '../../utils/Context.js';
 
@@ -20,7 +20,7 @@ const Register = () => {
         let firstName = formData.get('firstName');
         let lastName = formData.get('lastName');
 
-        let response = await register({ username, firstName, lastName, password });
+        let response = await registerService({ username, firstName, lastName, password });
         if (response.ok) {
             setCookie(response.token);
             setUsername(username);
