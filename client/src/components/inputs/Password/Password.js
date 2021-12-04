@@ -1,31 +1,30 @@
 import { Form } from 'semantic-ui-react';
 import { useFormContext } from "react-hook-form";
 
+import ErrorInput from '../../error/ErrorInput';
+
 const Password = () => {
-    const { register, formState: { errors } } = useFormContext();
+    const { register } = useFormContext();
     return (
         <Form.Field>
-            {errors.password ? (
-                <>
-                    {errors.password.type === "required" && (
-                        <p> {errors.password.message} </p>
-                    )}
-                    {errors.password.type === "minLength" && (
-                        <p> Your Password must be more than 3 letters </p>
-                    )}
-                    {errors.password.type === "maxLength" && (
-                        <p> Your Password must be smaller than 15 letters </p>
-                    )}
-                </>
-            ) : null}
+            <ErrorInput value="password" />
             <label>Password</label>
             <input
                 placeholder='Password'
-                type="text"
+                type="password"
                 {...register("password", {
-                    required: "Password is Required",
-                    minLength: 3,
-                    maxLength: 15
+                    required: {
+                        value: true,
+                        message: "Password is Required!"
+                    },
+                    minLength: {
+                        value: 4,
+                        message: `Password must be bigger than 4 letters!`
+                    },
+                    maxLength: {
+                        value: 15,
+                        message: `Password must be smaller than 15 letters!`
+                    }
                 })}
             />
         </Form.Field>
