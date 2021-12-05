@@ -45,7 +45,28 @@ const login = async (req, res) => {
     }
 };
 
+const list = async (req, res) => {
+    try{
+        let users = await userService.getAll();
+
+        res.json({
+            ok: true, 
+            status: 200, 
+            statusCode: "OK",
+            users
+        });
+    }catch(err){
+        res.status(401).json({
+            ok: false,
+            status: "Unauthorized",
+            statusCode: 401,
+            message: err.message
+        });
+    }
+};
+
 router.post('/login', login);
 router.post('/register', register)
+router.get('/list', list);
 
 module.exports = router;

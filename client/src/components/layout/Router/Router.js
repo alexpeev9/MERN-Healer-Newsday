@@ -5,7 +5,7 @@ import Error from '../../../pages/Error';
 import Register from '../../../pages/Register';
 import Login from '../../../pages/Login';
 import Home from '../../../pages/Home';
-
+import UserList from '../../../pages/UserList';
 import Logout from '../../auth/Logout';
 
 const Router = () => {
@@ -15,8 +15,9 @@ const Router = () => {
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
-                <Route path="*" element={<Error />} />
                 <Route path="/logout" element={<Logout />} />
+                <Route path="/user-list" element={<UserList />} />
+                <Route path="*" element={<Error />} />
             </Routes>
         </BrowserRouter>
     );
