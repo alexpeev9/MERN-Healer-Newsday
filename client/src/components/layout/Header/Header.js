@@ -15,6 +15,9 @@ const Header = ({ user }) => {
                         <div className="navbar-nav">
                             <a href="/" className="nav-item nav-link active">Home</a>
                         </div>
+                        <div className="navbar-nav">
+                            <a href="/user-list" className="nav-item nav-link active">User List</a>
+                        </div>
                         <div className="navbar-nav ms-auto">
                             {user ? (
                                 <>

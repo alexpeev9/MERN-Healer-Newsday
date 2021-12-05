@@ -12,5 +12,10 @@ export const registerService = async (userData) => {
 
 export const getUserList = async () => {
     let response = await serviceFetch('/user/list', 'GET');
-    return response.users;
+    return response;
+};
+
+export const logoutUser = async () => {
+    let response = await serviceFetch('/user/logout', 'POST');
+    return response;
 };
