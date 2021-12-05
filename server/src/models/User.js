@@ -34,6 +34,10 @@ const userSchema = new mongoose.Schema({
         minLength: [4, 'Password cannot be less than 4 characters'],
         maxLength: [15, 'Password cannot be more than 10 characters']
     },
+    isAdmin: {
+        type: Boolean,
+        required: true,
+    },
 })
 
 userSchema.pre('save', function(next) {

@@ -17,6 +17,7 @@ exports.login = async ({ username, password }) => {
     let payload = {
         _id: user._id,
         username: user.username,
+        isAdmin: user.isAdmin
     };
 
     let token = await jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '7D' });
@@ -30,8 +31,9 @@ exports.register = async (userData) => {
     {
         throw new Error('This username is already been used!')
     }
+    userData.isAdmin = false;
     return User.create(userData);
 }    
 
-exports.getAll = () => User.find().lean();
+exports.getAll = () => User.find().select(['-password', '-isAdmin']).lean();
 exports.getOne = (id) => User.findById(id).lean();
