@@ -12,7 +12,10 @@ export const serviceFetch = async (url, method, currData) => {
         method,
         headers: {
             'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': 'http://localhost:5000'
         },
+        withCredentials: true,
+        credentials: 'include',
         body: JSON.stringify(currData)
     }
     return new Promise((resolve, reject) => {
