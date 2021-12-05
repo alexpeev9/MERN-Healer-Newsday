@@ -1,13 +1,11 @@
-import { useContext } from "react"
 import { Navigate } from 'react-router-dom';
 
 import { removeCookies } from '../../../utils/cookieUtils.js';
-import { UserContext } from '../../../utils/Context.js';
+import { logoutUser } from '../../../services/userService';
 
 const Logout = () => {
-    const [username, setUsername] = useContext(UserContext)
     removeCookies();
-    setUsername(username);
+    logoutUser();
     return <Navigate to="/" replace={true} />;
 };
 
