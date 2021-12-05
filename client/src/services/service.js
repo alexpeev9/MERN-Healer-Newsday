@@ -15,7 +15,6 @@ export const serviceFetch = async (url, method, currData) => {
         },
         body: JSON.stringify(currData)
     }
-    console.log(`${baseUrl()}${url}`);
     return new Promise((resolve, reject) => {
         fetch(`${baseUrl()}${url}`, body)
             .then(data => data.json())
