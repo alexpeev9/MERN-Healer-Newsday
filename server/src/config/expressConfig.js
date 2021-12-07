@@ -1,22 +1,26 @@
 const express = require('express');
+const cors = require('cors');
 const path = require('path');
+const cookieParser = require("cookie-parser")
 
+const options = {
+    origin: [
+        `http://localhost:${process.env.CLIENTPORT}`,
+        `${process.env.PRODURL}`
+    ],
+    credentials: true,
+}
 function expressConfig(app) {
+    app.options("*", cors(options))
+    app.use(cors(options))
     app.use(express.urlencoded({extended: false}));
     app.use(express.json());
+    app.use(cookieParser());
+
     if(process.env.NODE_ENV == "production")
     {
         app.use(express.static(path.join(__dirname,'../../../','/client/build/')));
     }
-    app.use((req, res, next) => {
-     res.header("Access-Control-Allow-Origin", "*");
-     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-     if (req.method === 'OPTIONS') {
-         res.header("Access-Control-Allow-Methods", "PUT, POST, DELETE, GET");
-         return res.status(200).json({});
-     }
-     next();
-});
 }
 
 module.exports = expressConfig;
