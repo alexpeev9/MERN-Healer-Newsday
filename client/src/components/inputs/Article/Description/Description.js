@@ -17,11 +17,11 @@ const Description = () => {
                         message: "Description is Required!"
                     },
                     minLength: {
-                        value: 20,
+                        value: 400,
                         message: `Description must be more than 400 characters!`
                     },
                     maxLength: {
-                        value: 100,
+                        value: 4000,
                         message: `Description must be smaller than 4000 characters!`
                     }
                 })}

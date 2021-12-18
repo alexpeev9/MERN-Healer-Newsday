@@ -7,9 +7,9 @@ const Title = () => {
     return (
         <Form.Field>
             <ErrorInput value="title" />
-            <label>FirstName</label>
+            <label>Title</label>
             <input
-                placeholder='FirstName'
+                placeholder='Title'
                 type="text"
                 {...register("title", {
                     required: {

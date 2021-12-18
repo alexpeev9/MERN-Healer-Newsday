@@ -22,6 +22,7 @@ const Header = ({ user }) => {
                             {user ? (
                                 <>
                                     <p className="nav-item nav-link user-message">Hello {user}</p>
+                                    <a href="/article/create" className="nav-item nav-link active">Create Article</a>
                                     <a href="/logout" className="nav-item nav-link">Logout</a>
                                 </>) : (
                                 <>
