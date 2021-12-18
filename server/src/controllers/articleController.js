@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const articleService = require('../services/articleService');
 const { isAuthenticated } = require('../middlewares/authMiddleware');
-const { assignCreator } = require('../middlewares/articleMiddleware');
+const { assignCreator, isAuthor } = require('../middlewares/articleMiddleware');
 
 const articleCreate = async (req,res) => {
     let { title, imageUrl, description, creator } = req.body;
@@ -64,7 +64,28 @@ const articleGetOne = async (req, res) => {
     }
 };
 
+const articleDelete = async (req, res) => {
+    try {
+        let articleId = req.params.articleId;
+        await articleService.destroy(articleId);
+
+        res.json({
+            ok: true,
+            status: 200,
+            statusCode: "OK",
+        });
+    } catch (err) {
+        res.status(401).json({
+            ok: false,
+            status: "Unauthorized!",
+            statusCode: 401,
+            message: err.message
+        });
+    }
+};
+
 router.post('/create', assignCreator, articleCreate);
 router.get('/list', articleGetList);
+router.delete('/delete/:articleId', isAuthenticated, isAuthor, articleDelete);
 router.get('/:articleId', articleGetOne);
 module.exports = router;

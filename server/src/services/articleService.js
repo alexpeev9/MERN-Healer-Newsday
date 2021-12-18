@@ -9,6 +9,12 @@ exports.create = async (articleData) => {
     return User.updateMany({ "_id": article.creator }, { $push: { myArticles: article._id } })
 };
 
+exports.destroy = async (id) => {
+    const article = await Article.findOne({ _id: id });
+    await User.findOneAndUpdate({ "_id": article.creator }, { $pull: { myArticles: article._id } });
+    return article.remove();
+}
+
 // exports.edit = (id, articleData) => {
 //     return Article.updateOne({ _id: id }, { $set: articleData }, { runValidators: true })
 // }

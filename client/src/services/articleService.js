@@ -14,3 +14,8 @@ export const getOneService= async (id) => {
     let response = await serviceFetch(`/article/${id}`, 'GET');
     return response;
 };
+
+export const deleteOneService= async (id) => {
+    let response = await serviceFetch(`/article/delete/${id}`, 'DELETE');
+    return response;
+};

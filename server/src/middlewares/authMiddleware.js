@@ -6,7 +6,7 @@ exports.isAuthenticated = (req, res, next) => {
 
     if (token) {
         try {
-            jwt.verify(token, process.env.JWT_SECRET)
+            req.body.requestSender = jwt.verify(token, process.env.JWT_SECRET)
             return next();
         } catch (e) {
             res.clearCookie(cookieName)
