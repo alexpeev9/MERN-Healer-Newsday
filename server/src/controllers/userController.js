@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const userService = require('../services/userService');
-const authMiddleware = require('../middlewares/authMiddleware');
-const adminMiddleware = require('../middlewares/adminMiddleware');
+const { isAuthorized } = require('../middlewares/authMiddleware');
 
 const register = async (req, res) => {
     let { username, firstName, lastName, password } = req.body;
@@ -9,7 +8,12 @@ const register = async (req, res) => {
     try {
         await userService.register({ username, firstName, lastName, password });
         let token = await userService.login({ username, password });
-
+        
+        res.cookie("token", token, {
+            secure: true,
+            httpOnly: true
+        })
+        
         res.json({
             ok: true,
             status: 200,
@@ -61,6 +65,11 @@ const list = async (req, res) => {
     try {
         let users = await userService.getAll();
 
+        res.cookie("token", token, {
+            secure: true,
+            httpOnly: true
+        })
+
         res.json({
             ok: true,
             status: 200,
@@ -80,6 +89,6 @@ const list = async (req, res) => {
 router.post('/login', login);
 router.post('/register', register);
 router.post('/logout', logout);
-router.get('/list', adminMiddleware, list);
+router.get('/list', isAuthorized, list);
 
 module.exports = router;
