@@ -7,6 +7,7 @@ import Login from '../../../pages/Login';
 import Home from '../../../pages/Home';
 import UserList from '../../../pages/UserList';
 import Logout from '../../auth/Logout';
+import CreateArticle from '../../../pages/Article/Create';
 
 const Router = () => {
     return (
@@ -17,6 +18,7 @@ const Router = () => {
                 <Route path="/register" element={<Register />} />
                 <Route path="/logout" element={<Logout />} />
                 <Route path="/user-list" element={<UserList />} />
+                <Route path="/article/create" element={<CreateArticle />} />
                 <Route path="*" element={<Error />} />
             </Routes>
         </BrowserRouter>
