@@ -4,3 +4,8 @@ export const createService = async (articleData) => {
     let response = await serviceFetch('/article/create', 'POST', articleData);
     return response;
 };
+
+export const getAllService = async () => {
+    let response = await serviceFetch('/article/list', 'GET');
+    return response;
+};

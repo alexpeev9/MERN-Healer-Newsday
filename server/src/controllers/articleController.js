@@ -24,6 +24,27 @@ const articleCreate = async (req,res) => {
     }    
 }
 
+const articleList = async (req, res) => {
+    try {
+        let articles = await articleService.list();
+
+        res.json({
+            ok: true,
+            status: 200,
+            statusCode: "OK",
+            articles
+        });
+    } catch (err) {
+        res.status(500).json({
+            ok: false,
+            status: "Cannot Get Articles",
+            statusCode: 500,
+            message: err.message
+        });
+    }
+};
+
 router.post('/create', assignCreator, articleCreate);
+router.get('/list', articleList);
 
 module.exports = router;

@@ -65,11 +65,6 @@ const list = async (req, res) => {
     try {
         let users = await userService.getAll();
 
-        res.cookie("token", token, {
-            secure: true,
-            httpOnly: true
-        })
-
         res.json({
             ok: true,
             status: 200,
