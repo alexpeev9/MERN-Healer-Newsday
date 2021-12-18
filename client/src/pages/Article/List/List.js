@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-import { getAllService } from "../../../services/articleService";
+import { getListService } from "../../../services/articleService";
 
 const List = () => {
     const [articles, setArticles] = useState();
@@ -8,7 +8,7 @@ const List = () => {
 
     useEffect(() => {
         const getArticles = async () => {
-            const response = await getAllService();
+            const response = await getListService();
     
             if (response.ok) {
                 setArticles(response.articles);
@@ -36,7 +36,7 @@ const List = () => {
                                     <td>{i + 1}</td>
                                     <td>{a.title}</td>
                                     <td><img className="d-flex" src={a.imageUrl} alt={a.title} width="300" height="300" /></td>
-                                    <td><a href={`/article/${a._id}`} className="nav-item nav-link active">User List</a></td>
+                                    <td><a href={`/article/${a._id}`} className="text-white">User List</a></td>
                                 </tr>
                             ))}
                         </tbody>
