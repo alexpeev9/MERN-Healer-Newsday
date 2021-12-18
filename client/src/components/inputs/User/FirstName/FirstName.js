@@ -1,33 +1,32 @@
 import { Form } from 'semantic-ui-react';
 import { useFormContext } from "react-hook-form";
+import ErrorInput from '../../ErrorInput';
 
-import ErrorInput from '../../error/ErrorInput';
-
-const LastName = () => {
+const FirstName = () => {
     const { register } = useFormContext();
     return (
         <Form.Field>
-            <ErrorInput value="lastName" />
-            <label>LastName</label>
+            <ErrorInput value="firstName" />
+            <label>FirstName</label>
             <input
-                placeholder='LastName'
+                placeholder='FirstName'
                 type="text"
-                {...register("lastName", {
+                {...register("firstName", {
                     required: {
                         value: true,
-                        message: "LastName is Required!"
+                        message: "FirstName is Required!"
                     },
                     minLength: {
                         value: 3,
-                        message: `LastName must be bigger than 3 letters!`
+                        message: `FirstName must be bigger than 3 letters!`
                     },
                     maxLength: {
                         value: 15,
-                        message: `LastName must be smaller than 15 letters!`
+                        message: `FirstName must be smaller than 15 letters!`
                     },
                     pattern: {
                         value: /^[a-zA-Z]+$/,
-                        message: "LastName should consist of only english letters"
+                        message: "FirstName should consist of only english letters"
                     }
                 })}
             />
@@ -35,4 +34,4 @@ const LastName = () => {
     );
 }
 
-export default LastName;
+export default FirstName;

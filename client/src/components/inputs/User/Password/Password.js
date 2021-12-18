@@ -1,7 +1,7 @@
 import { Form } from 'semantic-ui-react';
 import { useFormContext } from "react-hook-form";
 
-import ErrorInput from '../../error/ErrorInput';
+import ErrorInput from '../../ErrorInput';
 
 const Password = () => {
     const { register } = useFormContext();

@@ -3,11 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { useForm, FormProvider } from "react-hook-form";
 import { Form, Button } from 'semantic-ui-react';
 
-import Username from "../../components/inputs/Username";
-import FirstName from "../../components/inputs/FirstName"
-import LastName from "../../components/inputs/LastName"
-import Password from "../../components/inputs/Password";
-import RePassword from "../../components/inputs/RePassword";
+import Username from "../../components/inputs/User/Username";
+import FirstName from "../../components/inputs/User/FirstName"
+import LastName from "../../components/inputs/User/LastName"
+import Password from "../../components/inputs/User/Password";
+import RePassword from "../../components/inputs/User/RePassword";
 
 import './Register.css';
 import { registerService } from '../../services/userService.js';
