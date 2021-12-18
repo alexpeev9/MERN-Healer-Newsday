@@ -5,7 +5,12 @@ export const createService = async (articleData) => {
     return response;
 };
 
-export const getAllService = async () => {
+export const getListService = async () => {
     let response = await serviceFetch('/article/list', 'GET');
+    return response;
+};
+
+export const getOneService= async (id) => {
+    let response = await serviceFetch(`/article/${id}`, 'GET');
     return response;
 };

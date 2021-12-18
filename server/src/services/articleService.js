@@ -1,8 +1,8 @@
 const Article = require('../models/Article');
 const User = require('../models/User');
 
-exports.list = () => Article.find().lean();
-// exports.getOne = (id) => Article.findById(id).populate('votes').lean();
+exports.getlist = () => Article.find().lean();
+exports.getOne = (id) => Article.findById(id).populate('votes').lean();
 
 exports.create = async (articleData) => {
     let article = await Article.create(articleData);
