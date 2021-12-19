@@ -2,7 +2,7 @@ import { Form } from 'semantic-ui-react';
 import { useFormContext } from "react-hook-form";
 import ErrorInput from '../../ErrorInput';
 
-const ImageUrl = () => {
+const ImageUrl = ({imageUrl}) => {
     const { register } = useFormContext();
     return (
         <Form.Field>
@@ -11,6 +11,7 @@ const ImageUrl = () => {
             <input
                 placeholder='ImageUrl'
                 type="text"
+                defaultValue={imageUrl}
                 {...register("imageUrl", {
                     required: {
                         value: true,

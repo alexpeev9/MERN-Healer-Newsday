@@ -2,7 +2,7 @@ import { Form } from 'semantic-ui-react';
 import { useFormContext } from "react-hook-form";
 import ErrorInput from '../../ErrorInput';
 
-const Description = () => {
+const Description = ({description}) => {
     const { register } = useFormContext();
     return (
         <Form.Field>
@@ -11,6 +11,7 @@ const Description = () => {
             <input
                 placeholder='Description'
                 type="text"
+                defaultValue={description}
                 {...register("description", {
                     required: {
                         value: true,
