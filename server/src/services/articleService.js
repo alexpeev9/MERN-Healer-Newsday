@@ -15,9 +15,9 @@ exports.destroy = async (id) => {
     return article.remove();
 }
 
-// exports.edit = (id, articleData) => {
-//     return Article.updateOne({ _id: id }, { $set: articleData }, { runValidators: true })
-// }
+exports.edit = (id, articleData) => {
+    return Article.updateOne({ "_id": id }, { $set: articleData }, { runValidators: true })
+}
 
 // exports.deleteArticle = async (id) => {
 //     const article = await Article.findOne({ _id: id });

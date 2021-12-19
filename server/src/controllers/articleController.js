@@ -64,6 +64,27 @@ const articleGetOne = async (req, res) => {
     }
 };
 
+const articleUpdate = async (req, res) => {
+    try {
+        let articleId = req.params.articleId;
+        let article = await articleService.edit(articleId, req.body);
+
+        res.json({
+            ok: true,
+            status: 200,
+            statusCode: "OK",
+            article
+        });
+    } catch (err) {
+        res.status(500).json({
+            ok: false,
+            status: "Cannot Get Article",
+            statusCode: 500,
+            message: err.message
+        });
+    }
+};
+
 const articleDelete = async (req, res) => {
     try {
         let articleId = req.params.articleId;
@@ -88,4 +109,5 @@ router.post('/create', assignCreator, articleCreate);
 router.get('/list', articleGetList);
 router.delete('/delete/:articleId', isAuthenticated, isAuthor, articleDelete);
 router.get('/:articleId', articleGetOne);
+router.put('/edit/:articleId', isAuthenticated, isAuthor, articleUpdate);
 module.exports = router;
