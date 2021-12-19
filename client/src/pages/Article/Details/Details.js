@@ -44,6 +44,7 @@ const Details = () => {
                             <th scope="col">Image</th>
                             <th scope="col">Description</th>
                             <th scope="col">Votes</th>
+                            <th scope="col">Author</th>
                             <th scope="col">Buttons</th>
                         </tr>
                     </thead>
@@ -53,6 +54,7 @@ const Details = () => {
                             <td><img className="d-flex" src={article.imageUrl} alt={article.title} width="300" height="300" /></td>
                             <td>{article.description}</td>
                             <td>{article.rating}</td>
+                            <td>{article.creator.firstName} {article.creator.lastName} </td>
                             <td>
                                 <a href={`/article/edit/${article._id}`} className="text-white">Update</a>
                                 <br />

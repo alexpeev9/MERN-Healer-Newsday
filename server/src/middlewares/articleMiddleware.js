@@ -4,7 +4,8 @@ const jwt = require("jsonwebtoken")
 exports.isAuthor  = async (req, res, next) => {
     try{
         let article = await articleService.getOne(req.params.articleId); 
-        if( article.creator == req.body.requestSender._id)
+        let sender = req.body.requestSender;
+        if( article.creator == sender._id || sender.isAdmin == true)
         {
             req.body.article = article;
             return next();
