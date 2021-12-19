@@ -15,6 +15,11 @@ export const getOneService= async (id) => {
     return response;
 };
 
+export const updateService= async (id, articleData) => {
+    let response = await serviceFetch(`/article/edit/${id}`, 'PUT', articleData);
+    return response;
+};
+
 export const deleteOneService= async (id) => {
     let response = await serviceFetch(`/article/delete/${id}`, 'DELETE');
     return response;

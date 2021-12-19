@@ -9,6 +9,7 @@ import UserList from '../../../pages/UserList';
 import Logout from '../../auth/Logout';
 import CreateArticle from '../../../pages/Article/Create';
 import DetailsArticle from '../../../pages/Article/Details';
+import UpdateArticle from '../../../pages/Article/Update';
 
 const Router = () => {
     return (
@@ -21,6 +22,7 @@ const Router = () => {
                 <Route path="/user-list" element={<UserList />} />
                 <Route path="/article/create" element={<CreateArticle />} />
                 <Route path="/article/:articleId" element={<DetailsArticle />} />
+                <Route path="/article/edit/:articleId" element={<UpdateArticle />} />
                 <Route path="*" element={<Error />} />
             </Routes>
         </BrowserRouter>
