@@ -32,7 +32,7 @@ const Details = () => {
             }
         }
         getArticle();
-    }, [articleId])
+    }, [articleId, setError])
 
     return (
         article ?
