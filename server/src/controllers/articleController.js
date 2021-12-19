@@ -1,9 +1,9 @@
 const router = require('express').Router();
 const articleService = require('../services/articleService');
 const { isAuthenticated } = require('../middlewares/authMiddleware');
-const { assignCreator, isAuthor } = require('../middlewares/articleMiddleware');
+const { assignCreator, isAuthor, isNotVoted } = require('../middlewares/articleMiddleware');
 
-const articleCreate = async (req,res) => {
+const articleCreate = async (req, res) => {
     let { title, imageUrl, description, creator } = req.body;
     try {
         await articleService.create({ title, imageUrl, description, creator });
@@ -20,7 +20,7 @@ const articleCreate = async (req,res) => {
             statusCode: 500,
             message: err.message
         });
-    }    
+    }
 }
 
 const articleGetList = async (req, res) => {
@@ -105,9 +105,53 @@ const articleDelete = async (req, res) => {
     }
 };
 
+const articleUpVote = async (req, res) => {
+    try {
+        let articleId = req.params.articleId;
+        let requestSender = req.body.requestSender;
+        await articleService.upVote(articleId, requestSender);
+
+        res.json({
+            ok: true,
+            status: 200,
+            statusCode: "OK",
+        });
+    } catch (err) {
+        res.status(500).json({
+            ok: false,
+            status: "Cannot Upvote",
+            statusCode: 500,
+            message: err.message
+        });
+    }
+};
+
+const articleDownVote = async (req, res) => {
+    try {
+        let articleId = req.params.articleId;
+        let requestSender = req.body.requestSender;
+        await articleService.downVote(articleId, requestSender);
+
+        res.json({
+            ok: true,
+            status: 200,
+            statusCode: "OK",
+        });
+    } catch (err) {
+        res.status(500).json({
+            ok: false,
+            status: "Cannot Upvote",
+            statusCode: 500,
+            message: err.message
+        });
+    }
+};
+
 router.post('/create', assignCreator, articleCreate);
 router.get('/list', articleGetList);
 router.delete('/delete/:articleId', isAuthenticated, isAuthor, articleDelete);
-router.get('/:articleId', articleGetOne);
 router.put('/edit/:articleId', isAuthenticated, isAuthor, articleUpdate);
+router.get('/upvote/:articleId', isAuthenticated, isNotVoted, articleUpVote);
+router.get('/downvote/:articleId', isAuthenticated, isNotVoted, articleDownVote);
+router.get('/:articleId', articleGetOne);
 module.exports = router;

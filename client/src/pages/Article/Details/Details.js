@@ -1,7 +1,7 @@
 import { useEffect, useContext, useState } from "react"
 import { useParams, useNavigate } from 'react-router-dom';
 
-import { getOneService, deleteOneService } from "../../../services/articleService";
+import { getOneService, deleteOneService, upVoteService, downVoteService } from "../../../services/articleService";
 import { ErrorContext } from '../../../utils/Context.js';
 
 const Details = () => {
@@ -14,6 +14,28 @@ const Details = () => {
         let confirmed = window.confirm('Are you sure you want to delete this article?');
         if (confirmed) {
             const response = await deleteOneService(articleId);
+            if (response.ok) {
+                navigate('/');
+            } else {
+                setError(`Error: ${response.message}`);
+            }
+        }
+    }
+    const upvoteArticle = async () => {
+        let confirmed = window.confirm('Are you sure you want to upvote this article?');
+        if (confirmed) {
+            const response = await upVoteService(articleId);
+            if (response.ok) {
+                navigate('/');
+            } else {
+                setError(`Error: ${response.message}`);
+            }
+        }
+    }
+    const downvoteArticle = async () => {
+        let confirmed = window.confirm('Are you sure you want to downvote this article?');
+        if (confirmed) {
+            const response = await downVoteService(articleId);
             if (response.ok) {
                 navigate('/');
             } else {
@@ -59,6 +81,9 @@ const Details = () => {
                                 <a href={`/article/edit/${article._id}`} className="text-white">Update</a>
                                 <br />
                                 <button onClick={deleteArticle}>Delete</button>
+                                <button onClick={upvoteArticle}>UpVote</button>
+                                <button onClick={downvoteArticle}>DownVote</button>
+
                             </td>
                         </tr>
                     </tbody>

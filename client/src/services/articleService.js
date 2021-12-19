@@ -24,3 +24,13 @@ export const deleteOneService= async (id) => {
     let response = await serviceFetch(`/article/delete/${id}`, 'DELETE');
     return response;
 };
+
+export const upVoteService= async (id) => {
+    let response = await serviceFetch(`/article/upvote/${id}`, 'GET');
+    return response;
+};
+
+export const downVoteService= async (id) => {
+    let response = await serviceFetch(`/article/downvote/${id}`, 'GET');
+    return response;
+};

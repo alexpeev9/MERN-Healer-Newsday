@@ -19,36 +19,10 @@ exports.edit = (id, articleData) => {
     return Article.updateOne({ "_id": id }, { $set: articleData }, { runValidators: true })
 }
 
-// exports.deleteArticle = async (id) => {
-//     const article = await Article.findOne({ _id: id });
-//     await User.findOneAndUpdate({ "_id": article.author }, { $pull: { myArticles: article._id } });
-//     return article.remove();
-// }
+exports.upVote = async (id, requestSender) => {
+    return Article.findOneAndUpdate({ "_id": id }, { $push: { votes: requestSender }, $inc: { rating: +1 } });
+}
 
-// exports.addUpVoteOnArticle = async (user, article) => {
-//     return Article.findOneAndUpdate({ "_id": article._id }, { $push: { votes: user._id }, $inc: { rating: +1 } });
-// }
-// exports.addDownVoteOnArticle = async (user, article) => {
-//     return Article.findOneAndUpdate({ "_id": article._id }, { $push: { votes: user._id }, $inc: { rating: -1 } });
-// }
-
-// exports.isOwn = async (article, userId) => {
-//     if (article.author._id == userId) {
-//         return true;
-//     }
-//     else {
-//         return false;
-//     }
-// }
-
-// exports.isVoted = async (article, userId) => {
-//     if (article.author._id == userId) {
-//         return true;
-//     }
-//     for (let currUser of article.votes) {
-//         if (currUser._id == userId) {
-//             return true;
-//         }
-//     }
-//     return false;
-// }
+exports.downVote = async (id, requestSender) => {
+    return Article.findOneAndUpdate({ "_id": id }, { $push: { votes: requestSender }, $inc: { rating: -1 } });
+}
