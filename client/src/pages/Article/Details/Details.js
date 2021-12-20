@@ -2,20 +2,24 @@ import { useEffect, useContext, useState } from "react"
 import { useParams, useNavigate } from 'react-router-dom';
 
 import { getOneService, deleteOneService, upVoteService, downVoteService } from "../../../services/articleService";
-import { ErrorContext } from '../../../utils/Context.js';
-
+import { ErrorContext } from '../../../utils/Context';
+import { getUserIdCookie, getUserIsAdminCookie } from '../../../utils/cookieUtils';
 const Details = () => {
     const { articleId } = useParams();
     const [article, setArticle] = useState();
-    const setError = useContext(ErrorContext)[1]
-    const navigate = useNavigate();
+    const [rating, setRating] = useState(0);
+    const [voted, setVoted] = useState(true);
 
+    const setError = useContext(ErrorContext)[1];
+    const navigate = useNavigate();
+    const userId = useState(getUserIdCookie())[0];
+    const isAdmin = getUserIsAdminCookie();
     const deleteArticle = async () => {
         let confirmed = window.confirm('Are you sure you want to delete this article?');
         if (confirmed) {
             const response = await deleteOneService(articleId);
             if (response.ok) {
-                navigate('/');
+                return navigate('/');
             } else {
                 setError(`Error: ${response.message}`);
             }
@@ -26,7 +30,9 @@ const Details = () => {
         if (confirmed) {
             const response = await upVoteService(articleId);
             if (response.ok) {
-                navigate('/');
+                setRating(article.rating += 1);
+                setVoted(true);
+                window.alert("Success!");
             } else {
                 setError(`Error: ${response.message}`);
             }
@@ -37,9 +43,13 @@ const Details = () => {
         if (confirmed) {
             const response = await downVoteService(articleId);
             if (response.ok) {
-                navigate('/');
+                setRating(article.rating -= 1);
+                setVoted(true);
+                window.alert("Success!");
             } else {
                 setError(`Error: ${response.message}`);
+                return navigate('/');
+
             }
         }
     }
@@ -49,13 +59,14 @@ const Details = () => {
             const response = await getOneService(articleId);
             if (response.ok) {
                 setArticle(response.article);
+                setRating(response.article?.rating);
+                setVoted(response.article?.votes.some(u => u._id === userId || response.article?.creator._id === userId));
             } else {
                 setError(`Error: ${response.message}`);
             }
         }
         getArticle();
-    }, [articleId, setError])
-
+    }, [articleId, setError, setVoted, setRating])
     return (
         article ?
             <div className="container">
@@ -75,21 +86,36 @@ const Details = () => {
                             <td>{article.title}</td>
                             <td><img className="d-flex" src={article.imageUrl} alt={article.title} width="300" height="300" /></td>
                             <td>{article.description}</td>
-                            <td>{article.rating}</td>
+                            <td>{rating}</td>
                             <td>{article.creator.firstName} {article.creator.lastName} </td>
                             <td>
-                                <a href={`/article/edit/${article._id}`} className="text-white">Update</a>
-                                <br />
-                                <button onClick={deleteArticle}>Delete</button>
-                                <button onClick={upvoteArticle}>UpVote</button>
-                                <button onClick={downvoteArticle}>DownVote</button>
-
+                                {(article.creator._id === userId) ? (
+                                    <>
+                                        <a href={`/article/edit/${article._id}`}><button>Update</button></a>
+                                    </>) :
+                                    (<></>)}
+                                {(article.creator._id === userId || isAdmin === "true") ? (
+                                    <>
+                                        <button onClick={deleteArticle}>Delete</button>
+                                    </>) :
+                                    (<></>)}
+                                {(!voted) ? (
+                                    <>
+                                        <button onClick={upvoteArticle}>UpVote</button>
+                                        <button onClick={downvoteArticle}>DownVote</button>
+                                    </>) :
+                                    (<></>)}
+                            </td>
+                            <td>
+                                {article.votes.map((v) => (
+                                    <p key={v._id}>a {v._id}</p>
+                                ))}
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            : <h3 className="text-danger text-center"> Loading... </h3>
+            : <h3 className="text-danger text-center"> This article does not exist! </h3>
     );
 }
 export default Details;

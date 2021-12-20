@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { getListService } from "../../../services/articleService";
 
 const List = () => {
-    const [articles, setArticles] = useState();
+    const [articles, setArticles] = useState([]);
     const [errorMessage, setErrorMessage] = useState();
 
     useEffect(() => {
@@ -11,15 +11,16 @@ const List = () => {
             const response = await getListService();
     
             if (response.ok) {
-                setArticles(response.articles);
+                setArticles(response.articles.reverse());
             } else {
                 setErrorMessage(`Error: ${response.message}`);
             }
         }
         getArticles();
     }, [])
+    console.log(articles.length);
     return (
-            articles ?
+            articles.length != 0 ?
                 <div className="container">
                     <table className="table table-dark">
                         <thead>
@@ -42,7 +43,7 @@ const List = () => {
                         </tbody>
                     </table>
                 </div>
-                : <h3 className="text-danger text-center"> {errorMessage} </h3>
+                : <h3 className="text-success text-center"> There are no articles yet. </h3>
         );
 }
 export default List;
