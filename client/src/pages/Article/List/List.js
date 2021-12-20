@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 
 import { getListService } from "../../../services/articleService";
-
+import { ErrorContext } from "../../../utils/Context";
 const List = () => {
     const [articles, setArticles] = useState([]);
-    const [errorMessage, setErrorMessage] = useState();
+    const setError = useContext(ErrorContext)[1];
 
     useEffect(() => {
         const getArticles = async () => {
@@ -13,14 +13,14 @@ const List = () => {
             if (response.ok) {
                 setArticles(response.articles.reverse());
             } else {
-                setErrorMessage(`Error: ${response.message}`);
+                setError(`Error: ${response.message}`);
             }
         }
         getArticles();
-    }, [])
+    }, [setError])
     console.log(articles.length);
     return (
-            articles.length != 0 ?
+            articles.length !== 0 ?
                 <div className="container">
                     <table className="table table-dark">
                         <thead>

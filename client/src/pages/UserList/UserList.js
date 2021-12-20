@@ -20,7 +20,7 @@ const UserList = () => {
             }
         }
         getUsers();
-    }, [])
+    }, [navigate, setError])
     return (
             users ?
                 <div className="container">

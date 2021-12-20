@@ -9,10 +9,9 @@ const Details = () => {
     const [article, setArticle] = useState();
     const [rating, setRating] = useState(0);
     const [voted, setVoted] = useState(true);
-
+    const [creator, setCreator] = useState(false);
     const setError = useContext(ErrorContext)[1];
     const navigate = useNavigate();
-    const userId = useState(getUserIdCookie())[0];
     const isAdmin = getUserIsAdminCookie();
     const deleteArticle = async () => {
         let confirmed = window.confirm('Are you sure you want to delete this article?');
@@ -57,10 +56,12 @@ const Details = () => {
     useEffect(() => {
         const getArticle = async () => {
             const response = await getOneService(articleId);
+            const userId = getUserIdCookie();
             if (response.ok) {
                 setArticle(response.article);
                 setRating(response.article?.rating);
-                setVoted(response.article?.votes.some(u => u._id === userId || response.article?.creator._id === userId));
+                setVoted(response.article?.votes.some(u => u._id === userId) || response.article?.creator._id === userId);
+                setCreator(response.article?.creator._id === userId);
             } else {
                 setError(`Error: ${response.message}`);
             }
@@ -89,12 +90,12 @@ const Details = () => {
                             <td>{rating}</td>
                             <td>{article.creator.firstName} {article.creator.lastName} </td>
                             <td>
-                                {(article.creator._id === userId) ? (
+                                {(creator) ? (
                                     <>
                                         <a href={`/article/edit/${article._id}`}><button>Update</button></a>
                                     </>) :
                                     (<></>)}
-                                {(article.creator._id === userId || isAdmin === "true") ? (
+                                {(creator || isAdmin === "true") ? (
                                     <>
                                         <button onClick={deleteArticle}>Delete</button>
                                     </>) :
