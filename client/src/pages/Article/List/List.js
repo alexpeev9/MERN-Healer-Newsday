@@ -18,7 +18,6 @@ const List = () => {
         }
         getArticles();
     }, [setError])
-    console.log(articles.length);
     return (
             articles.length !== 0 ?
                 <div className="container">
