@@ -1,30 +1,33 @@
-import React from 'react'
+import { lazy, Suspense } from 'react'
 import { BrowserRouter, Routes, Route } from "react-router-dom"
+import Spinner from "../../shared/Spinner"
 
-import Error from '../../../pages/Error';
-import Register from '../../../pages/Register';
-import Login from '../../../pages/Login';
-import Home from '../../../pages/Home';
-import UserList from '../../../pages/UserList';
-import Logout from '../../auth/Logout';
-import CreateArticle from '../../../pages/Article/Create';
-import DetailsArticle from '../../../pages/Article/Details';
-import UpdateArticle from '../../../pages/Article/Update';
+const Error = lazy(() => import('../../../pages/Error'));
+const Register = lazy(() => import('../../../pages/Register'));
+const Login = lazy(() => import('../../../pages/Login'));
+const Home = lazy(() => import('../../../pages/Home'));
+const UserList = lazy(() => import('../../../pages/UserList'));
+const Logout = lazy(() => import('../../auth/Logout'));
+const CreateArticle = lazy(() => import('../../../pages/Article/Create'));
+const DetailsArticle = lazy(() => import('../../../pages/Article/Details'));
+const UpdateArticle = lazy(() => import('../../../pages/Article/Update'));
 
 const Router = () => {
     return (
         <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/logout" element={<Logout />} />
-                <Route path="/user-list" element={<UserList />} />
-                <Route path="/article/create" element={<CreateArticle />} />
-                <Route path="/article/:articleId" element={<DetailsArticle />} />
-                <Route path="/article/edit/:articleId" element={<UpdateArticle />} />
-                <Route path="*" element={<Error />} />
-            </Routes>
+            <Suspense fallback={<Spinner />}>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/logout" element={<Logout />} />
+                    <Route path="/user-list" element={<UserList />} />
+                    <Route path="/article/create" element={<CreateArticle />} />
+                    <Route path="/article/:articleId" element={<DetailsArticle />} />
+                    <Route path="/article/edit/:articleId" element={<UpdateArticle />} />
+                    <Route path="*" element={<Error />} />
+                </Routes>
+            </Suspense>
         </BrowserRouter>
     );
 }
