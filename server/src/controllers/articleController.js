@@ -59,7 +59,7 @@ const articleGetOne = async (req, res) => {
             ok: false,
             status: "Cannot Get Article",
             statusCode: 500,
-            message: err.message
+            message: "Cannot Get Article"
         });
     }
 };
@@ -78,9 +78,9 @@ const articleUpdate = async (req, res) => {
     } catch (err) {
         res.status(500).json({
             ok: false,
-            status: "Cannot Get Article",
+            status: "Cannot Update Article",
             statusCode: 500,
-            message: err.message
+            message: "Cannot Update Article"
         });
     }
 };
