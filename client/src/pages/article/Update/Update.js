@@ -3,9 +3,9 @@ import { useForm, FormProvider } from "react-hook-form";
 import { useParams, useNavigate } from 'react-router-dom';
 import { Form, Button } from 'semantic-ui-react';
 
-import Title from "../../../components/inputs/articlei/Title";
-import ImageUrl from "../../../components/inputs/articlei/ImageUrl";
-import Description from "../../../components/inputs/articlei/Description";
+import Title from "../../../components/inputs/article/Title";
+import ImageUrl from "../../../components/inputs/article/ImageUrl";
+import Description from "../../../components/inputs/article/Description";
 
 import { getOneService, updateService } from '../../../services/articleService.js';
 import { ErrorContext } from '../../../utils/Context.js';
