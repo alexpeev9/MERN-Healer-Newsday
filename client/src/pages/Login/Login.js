@@ -4,8 +4,8 @@ import { useForm, FormProvider } from "react-hook-form";
 import { Form, Button } from 'semantic-ui-react';
 
 import './Login.css';
-import Username from "../../components/inputs/User/Username";
-import Password from "../../components/inputs/User/Password";
+import Username from "../../components/inputs/useri/Username";
+import Password from "../../components/inputs/useri/Password";
 
 import { loginService } from '../../services/userService.js';
 import { setCookie } from '../../utils/cookieUtils.js';

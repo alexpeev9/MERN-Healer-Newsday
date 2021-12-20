@@ -4,11 +4,11 @@ import { useForm, FormProvider } from "react-hook-form";
 import { Form, Button } from 'semantic-ui-react';
 
 import './Register.css';
-import Username from "../../components/inputs/User/Username";
-import FirstName from "../../components/inputs/User/FirstName"
-import LastName from "../../components/inputs/User/LastName"
-import Password from "../../components/inputs/User/Password";
-import RePassword from "../../components/inputs/User/RePassword";
+import Username from "../../components/inputs/useri/Username";
+import FirstName from "../../components/inputs/useri/FirstName"
+import LastName from "../../components/inputs/useri/LastName"
+import Password from "../../components/inputs/useri/Password";
+import RePassword from "../../components/inputs/useri/RePassword";
 
 import { registerService } from '../../services/userService.js';
 import { setCookie } from '../../utils/cookieUtils.js';
