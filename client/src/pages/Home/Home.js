@@ -1,4 +1,4 @@
-import ListArticle from '../articlei/List';
+import ListArticle from '../article/List';
 
 const Home = () => {
     return (
