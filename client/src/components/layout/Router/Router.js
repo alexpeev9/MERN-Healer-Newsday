@@ -8,9 +8,9 @@ const Login = lazy(() => import('../../../pages/Login'));
 const Home = lazy(() => import('../../../pages/Home'));
 const UserList = lazy(() => import('../../../pages/UserList'));
 const Logout = lazy(() => import('../../auth/Logout'));
-const CreateArticle = lazy(() => import('../../../pages/Article/Create'));
-const DetailsArticle = lazy(() => import('../../../pages/Article/Details'));
-const UpdateArticle = lazy(() => import('../../../pages/Article/Update'));
+const CreateArticle = lazy(() => import('../../../pages/articlei/Create'));
+const DetailsArticle = lazy(() => import('../../../pages/articlei/Details'));
+const UpdateArticle = lazy(() => import('../../../pages/articlei/Update'));
 
 const Router = () => {
     return (
