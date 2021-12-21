@@ -1,40 +1,34 @@
 import './Header.css';
+import { Link } from 'react-router-dom';
 
 const Header = ({ user }) => {
     return (
-        <div className="m-4">
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                <div className="container-fluid">
-                    <a href="/" className="navbar-brand">
-                        <img src="/images/HealerFull.png" height="58" alt="Healer Logo" />
-                    </a>
-                    <button type="button" className="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-                    <div className="collapse navbar-collapse" id="navbarCollapse">
-                        <div className="navbar-nav">
-                            <a href="/" className="nav-item nav-link active">Home</a>
-                        </div>
-                        <div className="navbar-nav">
-                            <a href="/user-list" className="nav-item nav-link active">User List</a>
-                        </div>
-                        <div className="navbar-nav ms-auto">
+        <>
+            <div className="navbar navbar-inverse">
+                <div className="container">
+                    <div className="navbar-header">
+                        <button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span className="icon-bar"></span><span className="icon-bar"></span><span className="icon-bar"></span></button>
+                        <Link className="navbar-brand" to="/">
+                            <img src="/images/HealerFull.png" alt="Healer Newsday" /></Link>
+                    </div>
+                    <div className="navbar-collapse collapse">
+                        <ul className="nav navbar-nav pull-right mainNav">
+                            <li className="active"><Link to="/">Home</Link></li>
                             {user ? (
                                 <>
-                                    <p className="nav-item nav-link user-message">Hello {user}</p>
-                                    <a href="/article/create" className="nav-item nav-link active">Create Article</a>
-                                    <a href="/logout" className="nav-item nav-link">Logout</a>
+                                    <li><Link to="/">Hello {user}</Link></li>
+                                    <li><Link to="/article/create">Add Article</Link></li>
+                                    <li><Link to="/logout">Logout</Link></li>
                                 </>) : (
-                                <>
-                                    <a href="/login" className="nav-item nav-link">Login</a>
-                                    <a href="/register" className="nav-item nav-link">Register</a>
+                                    <>
+                                    <li><Link to="/login">Login</Link></li>
+                                    <li><Link to="/register">Register</Link></li>
                                 </>)}
-                        </div>
+                        </ul>
                     </div>
                 </div>
-            </nav>
-        </div>
-    );
+            </div>
+        </>)
 }
 
 export default Header;
