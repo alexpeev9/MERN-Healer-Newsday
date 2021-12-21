@@ -7,7 +7,7 @@ export const setCookie = (token) => {
     const userId = payload._id;
     const isAdmin = payload.isAdmin;
 
-    const options = {  expires: 7, path: '/', secure: true }
+    const options = { path: '/', secure: true }
     Cookies.set("username", username, options);
     Cookies.set("userId", userId, options);
     Cookies.set("isAdmin", isAdmin, options);
@@ -24,5 +24,6 @@ const getCookie = (name) => {
 };
 
 export const getUsernameCookie = () => getCookie("username");
+
 export const getUserIdCookie = () => getCookie("userId");
-export const getIsAdminCookie = () => getCookie("isAdmin");
+export const getUserIsAdminCookie = () => getCookie("isAdmin");

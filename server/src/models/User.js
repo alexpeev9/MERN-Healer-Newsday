@@ -38,6 +38,12 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         required: true,
     },
+    myArticles: [
+        {
+            type: mongoose.Types.ObjectId,
+            ref: 'Article',
+        }
+    ]
 })
 
 userSchema.pre('save', function(next) {

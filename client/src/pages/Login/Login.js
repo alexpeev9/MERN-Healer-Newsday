@@ -4,8 +4,9 @@ import { useForm, FormProvider } from "react-hook-form";
 import { Form, Button } from 'semantic-ui-react';
 
 import './Login.css';
-import Username from "../../components/inputs/Username/Username";
-import Password from "../../components/inputs/Password";
+import Username from "../../components/inputs/user/Username";
+import Password from "../../components/inputs/user/Password";
+
 import { loginService } from '../../services/userService.js';
 import { setCookie } from '../../utils/cookieUtils.js';
 import { UserContext, ErrorContext } from '../../utils/Context.js';
@@ -29,15 +30,15 @@ const Login = () => {
     return (
         <div className="login-form">
             <FormProvider {...methods} >
+                <h1>Login</h1>
                 <Form onSubmit={methods.handleSubmit(onLogin)} method="POST">
                     <Username />
                     <Password />
-                    <Button type="submit" className="btn btn-primary btn-block">
+                    <Button type="submit" className="btn btn-block">
                         Login
                     </Button>
                 </Form>
             </FormProvider>
-            <p className="text-center"><a href="/register">Create an Account</a></p>
         </div>
     );
 }

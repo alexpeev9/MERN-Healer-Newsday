@@ -3,13 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { useForm, FormProvider } from "react-hook-form";
 import { Form, Button } from 'semantic-ui-react';
 
-import Username from "../../components/inputs/Username";
-import FirstName from "../../components/inputs/FirstName"
-import LastName from "../../components/inputs/LastName"
-import Password from "../../components/inputs/Password";
-import RePassword from "../../components/inputs/RePassword";
-
 import './Register.css';
+import Username from "../../components/inputs/user/Username";
+import FirstName from "../../components/inputs/user/FirstName"
+import LastName from "../../components/inputs/user/LastName"
+import Password from "../../components/inputs/user/Password";
+import RePassword from "../../components/inputs/user/RePassword";
+
 import { registerService } from '../../services/userService.js';
 import { setCookie } from '../../utils/cookieUtils.js';
 import { UserContext, ErrorContext } from '../../utils/Context.js';
@@ -36,13 +36,14 @@ const Register = () => {
     return (
         <div className="register-form">
             <FormProvider {...methods} >
+                <h1>Register</h1>
                 <Form onSubmit={methods.handleSubmit(onRegister)} method="POST">
                     <Username />
                     <FirstName />
                     <LastName />
                     <Password />
-                    <RePassword value={ password.current }/>
-                    <Button type="submit" className="btn btn-success btn-block">
+                    <RePassword value={password.current} />
+                    <Button type="submit" className="btn btn-block">
                         Register
                     </Button>
                 </Form>
