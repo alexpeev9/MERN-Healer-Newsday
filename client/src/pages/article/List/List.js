@@ -1,4 +1,5 @@
 import { useEffect, useState, useContext } from "react"
+import { Link } from 'react-router-dom';
 
 import { getListService } from "../../../services/articleService";
 import { ErrorContext } from "../../../utils/Context";
@@ -9,7 +10,7 @@ const List = () => {
     useEffect(() => {
         const getArticles = async () => {
             const response = await getListService();
-    
+
             if (response.ok) {
                 setArticles(response.articles.reverse());
             } else {
@@ -19,30 +20,33 @@ const List = () => {
         getArticles();
     }, [setError])
     return (
-            articles.length !== 0 ?
-                <div className="container">
-                    <table className="table table-dark">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Title</th>
-                                <th scope="col">Image</th>
-                                <th scope="col">Details</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {articles?.map((a, i) => (
-                                <tr key={a._id}>
-                                    <td>{i + 1}</td>
-                                    <td>{a.title}</td>
-                                    <td><img className="d-flex" src={a.imageUrl} alt={a.title} width="300" height="300" /></td>
-                                    <td><a href={`/article/${a._id}`} className="text-white">User List</a></td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
-                : <h3 className="text-success text-center"> There are no articles yet. </h3>
-        );
+        <>
+            <div className="container">
+                { articles.length !== 0 ?
+                <>
+                <h2><span>Our latest articles</span></h2>
+                <div className="row">
+                    {articles?.map((a, i) => (
+                    <div className="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                        <div className="newsBox">
+                            <div className="thumbnail">
+                                <figure><img className="image-fixed" src={a.imageUrl} alt={a.title} /></figure>
+                                <div className="caption maxheight2">
+                                    <div className="box_inner">
+                                        <div className="box">
+                                            <p className="title"><strong>{a.title}</strong></p>
+                                        </div>
+                                        <p class="text-right">
+                                            <Link to={`/article/${a._id}`} className="btn-inline">Details</Link>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                </div> ))} </div> </>  : <h2><span>Our latest articles</span></h2> }
+            </div>
+        </>
+    );
 }
 export default List;
