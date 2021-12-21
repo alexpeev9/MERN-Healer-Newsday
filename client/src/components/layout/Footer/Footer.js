@@ -1,8 +1,15 @@
 const Footer = () => {
     return (
-        <footer className="page-footer font-small blue">
-            <div className="footer-copyright text-center py-3">© 2021 Copyright:
-                <a href="https://mern-healer-newsday.herokuapp.com/"> mern-healer-newsday.herokuapp.com</a>
+        <footer id="footer">
+            <div className="container">
+                <div className="social text-center">
+                    <a href="https://www.linkedin.com/in/alexpeev9/"><i className="fa fa-linkedin"></i></a>
+                    <a href="https://www.instagram.com/alexpeev9/"><i className="fa fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/alex.peev.1/"><i className="fa fa-facebook"></i></a>
+                    <a href="https://github.com/alexpeev9"><i className="fa fa-github"></i></a>
+                </div>
+
+                <div className="clear"></div>
             </div>
         </footer>
     );
