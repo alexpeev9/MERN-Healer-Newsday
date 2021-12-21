@@ -2,13 +2,12 @@ import { Form } from 'semantic-ui-react';
 import { useFormContext } from "react-hook-form";
 import ErrorInput from '../../ErrorInput';
 
-const ImageUrl = ({imageUrl}) => {
+const ImageUrl = ({ imageUrl }) => {
     const { register } = useFormContext();
     return (
         <Form.Field>
-            <ErrorInput value="imageUrl" />
-            <label>ImageUrl</label>
             <input
+                className="form-control"
                 placeholder='ImageUrl'
                 type="text"
                 defaultValue={imageUrl}
@@ -23,6 +22,7 @@ const ImageUrl = ({imageUrl}) => {
                     }
                 })}
             />
+            <ErrorInput value="imageUrl" />
         </Form.Field>
     );
 }
