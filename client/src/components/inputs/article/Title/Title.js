@@ -19,12 +19,12 @@ const Title = ({title}) => {
                         message: "Title is Required!"
                     },
                     minLength: {
-                        value: 20,
-                        message: `Title must be more than 20 letters!`
+                        value: 5,
+                        message: `Title must be more than 5 letters!`
                     },
                     maxLength: {
-                        value: 100,
-                        message: `Title must be smaller than 100 letters!`
+                        value: 35,
+                        message: `Title must be smaller than 35 letters!`
                     }
                 })}
             />
