@@ -7,9 +7,8 @@ const Password = () => {
     const { register } = useFormContext();
     return (
         <Form.Field>
-            <ErrorInput value="password" />
-            <label>Password</label>
             <input
+                className="form-control"
                 placeholder='Password'
                 type="password"
                 {...register("password", {
@@ -27,6 +26,7 @@ const Password = () => {
                     }
                 })}
             />
+            <ErrorInput value="password" />
         </Form.Field>
     );
 }

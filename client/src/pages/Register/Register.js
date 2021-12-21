@@ -36,13 +36,14 @@ const Register = () => {
     return (
         <div className="register-form">
             <FormProvider {...methods} >
+                <h1>Register</h1>
                 <Form onSubmit={methods.handleSubmit(onRegister)} method="POST">
                     <Username />
                     <FirstName />
                     <LastName />
                     <Password />
-                    <RePassword value={ password.current }/>
-                    <Button type="submit" className="btn btn-success btn-block">
+                    <RePassword value={password.current} />
+                    <Button type="submit" className="btn btn-block">
                         Register
                     </Button>
                 </Form>

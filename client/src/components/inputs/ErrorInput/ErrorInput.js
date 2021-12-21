@@ -22,7 +22,7 @@ const ErrorInput = (value) => {
                     <p className="text-danger">{errors[valueName].message}</p>
                 )}
             </>
-        ) : null}
+        ) : <p className="help-block"></p>}
     </>);
 }
 

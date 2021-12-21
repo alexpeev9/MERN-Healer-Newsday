@@ -6,9 +6,8 @@ const Username = () => {
     const { register } = useFormContext();
     return (
         <Form.Field>
-            <ErrorInput value="username" />
-            <label>Username</label>
             <input
+                className="form-control"
                 placeholder='Username'
                 type="text"
                 {...register("username", {
@@ -30,6 +29,7 @@ const Username = () => {
                     }
                 })}
             />
+            <ErrorInput value="username" />
         </Form.Field>
     );
 }

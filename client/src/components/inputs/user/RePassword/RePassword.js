@@ -7,9 +7,8 @@ const RePassword = (value) => {
     let repeatedPassword = value["value"];
     return (
         <Form.Field>
-            <ErrorInput value="rePassword" />
-            <label>RePassword</label>
             <input
+                className="form-control"
                 placeholder='Repeat Password'
                 type="password"
                 {...register("rePassword", {
@@ -21,6 +20,7 @@ const RePassword = (value) => {
                         value === repeatedPassword || "Passwords do not match!"
                 })}
             />
+            <ErrorInput value="rePassword" />
         </Form.Field>
     );
 }
