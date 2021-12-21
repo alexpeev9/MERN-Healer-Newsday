@@ -58,6 +58,9 @@ label {
 .section-title {
 	margin-bottom: 20px;
 }
+.white-text-1{
+	color: white !important;
+}
 /* Header */
 #head {
 	/*background: #181015 url( ../images/bg_header.jpg) no-repeat;*/
@@ -315,6 +318,11 @@ ul.list-spaces li {
 img {
 	max-width: 100%;
 }
+.image-fixed {
+	width: 200px;
+	height: 200px;
+}
+
 img.pull-right {
 	margin-left: 10px;
 }

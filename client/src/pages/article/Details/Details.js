@@ -1,5 +1,5 @@
 import { useEffect, useContext, useState } from "react"
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 
 import { getOneService, deleteOneService, upVoteService, downVoteService } from "../../../services/articleService";
 import { ErrorContext } from '../../../utils/Context';
@@ -70,53 +70,51 @@ const Details = () => {
     }, [articleId, setError, setVoted, setRating])
     return (
         article ?
-            <div className="container">
-                <table className="table table-dark">
-                    <thead>
-                        <tr>
-                            <th scope="col">Title</th>
-                            <th scope="col">Image</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Votes</th>
-                            <th scope="col">Author</th>
-                            <th scope="col">Buttons</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>{article.title}</td>
-                            <td><img className="d-flex" src={article.imageUrl} alt={article.title} width="300" height="300" /></td>
-                            <td>{article.description}</td>
-                            <td>{rating}</td>
-                            <td>{article.creator.firstName} {article.creator.lastName} </td>
-                            <td>
-                                {(creator) ? (
-                                    <>
-                                        <a href={`/article/edit/${article._id}`}><button>Update</button></a>
-                                    </>) :
-                                    (<></>)}
-                                {(creator || isAdmin === "true") ? (
-                                    <>
-                                        <button onClick={deleteArticle}>Delete</button>
-                                    </>) :
-                                    (<></>)}
-                                {(!voted) ? (
-                                    <>
-                                        <button onClick={upvoteArticle}>UpVote</button>
-                                        <button onClick={downvoteArticle}>DownVote</button>
-                                    </>) :
-                                    (<></>)}
-                            </td>
-                            <td>
-                                {article.votes.map((v) => (
-                                    <p key={v._id}>a {v._id}</p>
-                                ))}
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            : <h3 className="text-danger text-center"> This article does not exist! </h3>
+            <section className="container" >
+                <div className="row">
+                    <section className="col-12 maincontent">
+                        <h1 className="text-center">{article.title}</h1>
+                        <p>
+                            <img src={article.imageUrl} alt={article.title} className="img-rounded pull-right" width="300" />
+                            {article.description}
+                        </p>
+                        <section className="col-12 maincontent">
+                            <h3>Rating: {rating}</h3>
+                            {(article.votes.length !== 0) ? (
+                                <>
+                                    <h3>This article was voted by:</h3>
+                                    {article.votes.map((v) => (
+                                        <>
+                                            <p key={v._id}>{v.firstName} {v.lastName} - {v.username}</p>
+                                        </>
+                                    ))}
+                                </>) : (<h3>No one has voted yet!</h3>)}
+                        </section>
+                    </section>
+                </div>
+                <div className="row">
+                    <nav id="filter" className="text-center">
+                        <ul>
+                            {(creator) ? (
+                                <>
+                                    <li><button className="btn"><Link to={`/article/edit/${article._id}`} className="white-text-1">Edit</Link></button></li>
+                                </>) :
+                                (<></>)}
+                            {(creator || isAdmin === "true") ? (
+                                <>
+                                    <li> <button className="btn" onClick={deleteArticle}>Delete</button></li>
+                                </>) :
+                                (<></>)}
+                            {(!voted) ? (
+                                <>
+                                    <li><button className="btn" onClick={upvoteArticle}><i className="fa fa-thumbs-up"></i></button></li>
+                                    <li> <button className="btn" onClick={downvoteArticle}><i className="fa fa-thumbs-down"></i></button></li>
+                                </>) :
+                                (<></>)}
+                        </ul>
+                    </nav>
+                </div>
+            </section > : <h3> This article does not exist! </h3>
     );
 }
 export default Details;
