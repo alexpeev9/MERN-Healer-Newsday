@@ -43,13 +43,13 @@ const Update = () => {
     }
     return (
         hasCreator ? article ?
-            <div style={{ margin: "5rem" }}>
+            <div className="custom-container text-center">
                 <FormProvider {...methods} >
                     <Form onSubmit={methods.handleSubmit(onUpdate)}>
                         <Title title={article?.title} />
-                        <ImageUrl imageUrl={article?.imageUrl} />
                         <Description description={article?.description} />
-                        <Button type="submit" className="btn btn-success btn-block">
+                        <ImageUrl imageUrl={article?.imageUrl} />
+                        <Button type="submit" className="d-inline-block btn btn-success custom-button">
                             Update
                         </Button>
                     </Form>
