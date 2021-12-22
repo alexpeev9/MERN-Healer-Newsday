@@ -17,7 +17,7 @@ import { UserContext, ErrorContext } from '../../utils/Context.js';
 const Register = () => {
     const methods = useForm();
     const navigate = useNavigate();
-    const setUsername = useContext(UserContext)[1];
+    const [username, setUsername] = useContext(UserContext);
     const setError = useContext(ErrorContext)[1];
 
     const password = useRef({});
@@ -34,7 +34,7 @@ const Register = () => {
         }
     }
     return (
-        <div className="register-form">
+        !username ? <div className="register-form">
             <FormProvider {...methods} >
                 <h1>Register</h1>
                 <Form onSubmit={methods.handleSubmit(onRegister)} method="POST">
@@ -48,7 +48,7 @@ const Register = () => {
                     </Button>
                 </Form>
             </FormProvider>
-        </div>
+        </div> : <h3 className="text-center text-danger">You are already logged in!</h3>
     );
 }
 export default Register;

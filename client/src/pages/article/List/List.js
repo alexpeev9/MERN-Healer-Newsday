@@ -26,8 +26,8 @@ const List = () => {
                 <>
                 <h2><span>Our latest articles</span></h2>
                 <div className="row">
-                    {articles?.map((a, i) => (
-                    <div className="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                    {articles?.map((a) => (
+                    <div key={a._id} className="col-lg-3 col-md-3 col-sm-6 col-xs-6">
                         <div className="newsBox">
                             <div className="thumbnail">
                                 <figure><img className="image-fixed" src={a.imageUrl} alt={a.title} /></figure>
@@ -36,7 +36,7 @@ const List = () => {
                                         <div className="box">
                                             <p className="title"><strong>{a.title}</strong></p>
                                         </div>
-                                        <p class="text-right">
+                                        <p className="text-right">
                                             <Link to={`/article/${a._id}`} className="btn-inline">Details</Link>
                                         </p>
                                     </div>
