@@ -25,18 +25,19 @@ const Create = () => {
         }
     }
     return (
-        username ? <div style={{ margin: "5rem" }}>
-            <FormProvider {...methods} >
-                <Form onSubmit={methods.handleSubmit(onCreate)} method="POST">
-                    <Title />
-                    <ImageUrl />
-                    <Description />
-                    <Button type="submit" className="btn btn-primary btn-block">
-                        Create
-                    </Button>
-                </Form>
-            </FormProvider>
-        </div>  : <h3 className="text-center text-danger">You are already logged in!</h3>
+        username ?
+            <div className="custom-container text-center">
+                <FormProvider {...methods} >
+                    <Form onSubmit={methods.handleSubmit(onCreate)} method="POST">
+                        <Title />
+                        <Description />
+                        <ImageUrl />
+                        <Button type="submit" className="d-inline-block btn btn-success custom-button">
+                            Create
+                        </Button>
+                    </Form>
+                </FormProvider>
+            </div> : <h3 className="text-center text-danger">You are already logged in!</h3>
     );
 }
 export default Create;

@@ -1,7 +1,7 @@
 const Article = require('../models/Article');
 const User = require('../models/User');
 
-exports.getlist = () => Article.find().lean();
+exports.getlist = () => Article.find().populate('creator',['username']).lean();
 exports.getOne = (id) => Article.findById(id).populate('votes').populate('creator',['_id','firstName','lastName','username']).lean();
 exports.create = async (articleData) => {
     let article = await Article.create(articleData);
