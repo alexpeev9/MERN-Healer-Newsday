@@ -5,7 +5,7 @@ exports.isAuthor = async (req, res, next) => {
     try {
         let article = await articleService.getOne(req.params.articleId);
         let sender = req.body.requestSender;
-        if (article.creator == sender._id || sender.isAdmin == true) {
+        if (article.creator._id == sender._id || sender.isAdmin == true) {
             req.body.article = article;
             return next();
         }
