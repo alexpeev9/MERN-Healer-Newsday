@@ -13,7 +13,7 @@ const Header = ({ user }) => {
                     </div>
                     <div className="navbar-collapse collapse">
                         <ul className="nav navbar-nav pull-right mainNav">
-                            <li className="active"><Link to="/">Home</Link></li>
+                            <li><Link to="/">Home</Link></li>
                             {user ? (
                                 <>
                                     <li><Link to="/">Hello {user}</Link></li>

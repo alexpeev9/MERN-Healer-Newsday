@@ -19,7 +19,6 @@ const Logout = lazy(() => import('../../auth/Logout'));
 const CreateArticle = lazy(() => import('../../../pages/article/Create'));
 const DetailsArticle = lazy(() => import('../../../pages/article/Details'));
 const UpdateArticle = lazy(() => import('../../../pages/article/Update'));
-
 let timeout = 0
 
 const Layout = () => {

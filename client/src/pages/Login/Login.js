@@ -14,7 +14,7 @@ import { UserContext, ErrorContext } from '../../utils/Context.js';
 const Login = () => {
     const methods = useForm();
     const navigate = useNavigate();
-    const setUsername = useContext(UserContext)[1]
+    const [username, setUsername] = useContext(UserContext)
     const setError = useContext(ErrorContext)[1]
 
     const onLogin = async ({ username, password }) => {
@@ -28,7 +28,7 @@ const Login = () => {
         }
     }
     return (
-        <div className="login-form">
+        !username ? <div className="login-form">
             <FormProvider {...methods} >
                 <h1>Login</h1>
                 <Form onSubmit={methods.handleSubmit(onLogin)} method="POST">
@@ -39,7 +39,7 @@ const Login = () => {
                     </Button>
                 </Form>
             </FormProvider>
-        </div>
+        </div> : <h3 className="text-center text-danger">You are already logged in!</h3>
     );
 }
 export default Login;

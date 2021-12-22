@@ -8,15 +8,16 @@ import ImageUrl from "../../../components/inputs/article/ImageUrl";
 import Description from "../../../components/inputs/article/Description";
 
 import { createService } from '../../../services/articleService.js';
-import { ErrorContext } from '../../../utils/Context.js';
+import { ErrorContext, UserContext } from '../../../utils/Context.js';
 
 const Create = () => {
     const methods = useForm();
     const navigate = useNavigate();
     const setError = useContext(ErrorContext)[1]
+    const username = useContext(UserContext)[0];
 
-    const onCreate = async ({title, imageUrl, description}) => {
-        let response = await createService({title, imageUrl, description});
+    const onCreate = async ({ title, imageUrl, description }) => {
+        let response = await createService({ title, imageUrl, description });
         if (response.ok) {
             navigate('/');
         } else {
@@ -24,7 +25,7 @@ const Create = () => {
         }
     }
     return (
-        <div className="login-form">
+        username ? <div style={{ margin: "5rem" }}>
             <FormProvider {...methods} >
                 <Form onSubmit={methods.handleSubmit(onCreate)} method="POST">
                     <Title />
@@ -35,7 +36,7 @@ const Create = () => {
                     </Button>
                 </Form>
             </FormProvider>
-        </div>
+        </div>  : <h3 className="text-center text-danger">You are already logged in!</h3>
     );
 }
 export default Create;

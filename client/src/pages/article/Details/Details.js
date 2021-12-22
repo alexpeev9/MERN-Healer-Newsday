@@ -25,31 +25,22 @@ const Details = () => {
         }
     }
     const upvoteArticle = async () => {
-        let confirmed = window.confirm('Are you sure you want to upvote this article?');
-        if (confirmed) {
-            const response = await upVoteService(articleId);
-            if (response.ok) {
-                setRating(article.rating += 1);
-                setVoted(true);
-                window.alert("Success!");
-            } else {
-                setError(`Error: ${response.message}`);
-            }
+        const response = await upVoteService(articleId);
+        if (response.ok) {
+            setRating(article.rating += 1);
+            setVoted(true);
+        } else {
+            setError(`Error: ${response.message}`);
         }
     }
     const downvoteArticle = async () => {
-        let confirmed = window.confirm('Are you sure you want to downvote this article?');
-        if (confirmed) {
-            const response = await downVoteService(articleId);
-            if (response.ok) {
-                setRating(article.rating -= 1);
-                setVoted(true);
-                window.alert("Success!");
-            } else {
-                setError(`Error: ${response.message}`);
-                return navigate('/');
-
-            }
+        const response = await downVoteService(articleId);
+        if (response.ok) {
+            setRating(article.rating -= 1);
+            setVoted(true);
+        } else {
+            setError(`Error: ${response.message}`);
+            return navigate('/');
         }
     }
 
@@ -75,6 +66,7 @@ const Details = () => {
                     <section className="col-12 maincontent">
                         <h1 className="text-center">{article.title}</h1>
                         <p>
+                            <p>Author: {article.creator.firstName} {article.creator.lastName} ({article.creator.username})</p>
                             <img src={article.imageUrl} alt={article.title} className="img-rounded pull-right" width="300" />
                             {article.description}
                         </p>
@@ -84,11 +76,9 @@ const Details = () => {
                                 <>
                                     <h3>This article was voted by:</h3>
                                     {article.votes.map((v) => (
-                                        <>
-                                            <p key={v._id}>{v.firstName} {v.lastName} - {v.username}</p>
-                                        </>
+                                        <p key={v._id}>{v.firstName} {v.lastName} - {v.username}</p>
                                     ))}
-                                </>) : (<h3>No one has voted yet!</h3>)}
+                                </>) : (<></>)}
                         </section>
                     </section>
                 </div>
