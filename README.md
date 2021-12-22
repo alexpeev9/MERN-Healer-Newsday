@@ -59,9 +59,6 @@ This project is build with:
 
 #### Detail Page
 ![detail]
-
-####
-![Details-Logged]
 #### Register
 ![register]
 #### Login
