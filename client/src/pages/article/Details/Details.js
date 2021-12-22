@@ -13,6 +13,7 @@ const Details = () => {
     const setError = useContext(ErrorContext)[1];
     const navigate = useNavigate();
     const isAdmin = getUserIsAdminCookie();
+
     const deleteArticle = async () => {
         let confirmed = window.confirm('Are you sure you want to delete this article?');
         if (confirmed) {
@@ -30,7 +31,8 @@ const Details = () => {
             setRating(article.rating += 1);
             setVoted(true);
         } else {
-            setError(`Error: ${response.message}`);
+            setError(`${response.message}`);
+            return navigate('/login');
         }
     }
     const downvoteArticle = async () => {
@@ -39,8 +41,8 @@ const Details = () => {
             setRating(article.rating -= 1);
             setVoted(true);
         } else {
-            setError(`Error: ${response.message}`);
-            return navigate('/');
+            setError(`${response.message}`);
+            return navigate('/login');
         }
     }
 
@@ -65,11 +67,11 @@ const Details = () => {
                 <div className="row">
                     <section className="col-12 maincontent">
                         <h1 className="text-center">{article.title}</h1>
-                        <p>
+                        <span>
                             <p>Author: {article.creator.firstName} {article.creator.lastName} ({article.creator.username})</p>
                             <img src={article.imageUrl} alt={article.title} className="img-rounded pull-right" width="300" />
-                            {article.description}
-                        </p>
+                            <p>{article.description}</p>
+                        </span>
                         <section className="col-12 maincontent">
                             <h3>Rating: {rating}</h3>
                             {(article.votes.length !== 0) ? (

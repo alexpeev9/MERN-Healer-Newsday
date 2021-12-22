@@ -35,6 +35,8 @@ const List = () => {
                                     <div className="box_inner">
                                         <div className="box">
                                             <p className="title"><strong>{a.title}</strong></p>
+                                            <p className="small">Rating: {a.rating}</p>
+                                            <p className="small text-right">Author: {a.creator.username}</p>
                                         </div>
                                         <p className="text-right">
                                             <Link to={`/article/${a._id}`} className="btn-inline">Details</Link>

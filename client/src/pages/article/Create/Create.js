@@ -29,7 +29,7 @@ const Create = () => {
             <FormProvider {...methods} >
                 <Form onSubmit={methods.handleSubmit(onCreate)} method="POST">
                     <Title />
-                    <ImageUrl />
+                    <ImageUrl/>
                     <Description />
                     <Button type="submit" className="btn btn-primary btn-block">
                         Create
