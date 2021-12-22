@@ -25,31 +25,22 @@ const Details = () => {
         }
     }
     const upvoteArticle = async () => {
-        let confirmed = window.confirm('Are you sure you want to upvote this article?');
-        if (confirmed) {
-            const response = await upVoteService(articleId);
-            if (response.ok) {
-                setRating(article.rating += 1);
-                setVoted(true);
-                window.alert("Success!");
-            } else {
-                setError(`Error: ${response.message}`);
-            }
+        const response = await upVoteService(articleId);
+        if (response.ok) {
+            setRating(article.rating += 1);
+            setVoted(true);
+        } else {
+            setError(`Error: ${response.message}`);
         }
     }
     const downvoteArticle = async () => {
-        let confirmed = window.confirm('Are you sure you want to downvote this article?');
-        if (confirmed) {
-            const response = await downVoteService(articleId);
-            if (response.ok) {
-                setRating(article.rating -= 1);
-                setVoted(true);
-                window.alert("Success!");
-            } else {
-                setError(`Error: ${response.message}`);
-                return navigate('/');
-
-            }
+        const response = await downVoteService(articleId);
+        if (response.ok) {
+            setRating(article.rating -= 1);
+            setVoted(true);
+        } else {
+            setError(`Error: ${response.message}`);
+            return navigate('/');
         }
     }
 
