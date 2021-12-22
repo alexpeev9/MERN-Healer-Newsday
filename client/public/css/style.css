@@ -792,6 +792,15 @@ nav#filter a.current {
 	/* padding: 4px 8px; */
 }
 
+.custom-button{
+	margin: 2rem;
+}
+.custom-container{
+	margin: 5rem;
+}
+.custom-global-error{
+	margin-left: 1rem;
+}
 /**
   MEDIA QUERIES
 */
