@@ -798,6 +798,9 @@ nav#filter a.current {
 .custom-container{
 	margin: 5rem;
 }
+.custom-error-box{
+	display: inline-block;
+}
 .custom-global-error{
 	margin-left: 1rem;
 }
