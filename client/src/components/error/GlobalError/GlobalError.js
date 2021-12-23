@@ -12,8 +12,8 @@ const GlobalError = ({ error }) => {
 
     return (<>
         {error &&
-            <div className="d-flex text-center">
-                <div className="alert alert-danger text-center d-inline-block" role="alert">
+            <div className="text-center justify-content-center">
+                <div className="alert alert-danger text-center  custom-error-box" role="alert">
                     {error}
                     <button type="button" className="btn btn-light ml-2 custom-global-error" onClick={hideAlert}>X</button>
                 </div>

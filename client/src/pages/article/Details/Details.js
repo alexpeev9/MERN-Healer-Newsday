@@ -106,7 +106,7 @@ const Details = () => {
                         </ul>
                     </nav>
                 </div>
-            </section > : <h3> This article does not exist! </h3>
+            </section > : <></>
     );
 }
 export default Details;
